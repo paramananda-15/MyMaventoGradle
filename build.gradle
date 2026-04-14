@@ -1,20 +1,21 @@
-apply plugin: 'java'
-apply plugin: 'maven'
+plugins {
+    id 'java'
+}
 
 group = 'com.example'
 version = '1.0-SNAPSHOT'
 
-description = """MyMavenApp"""
+description = "MyMavenApp"
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
-
-
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
 
 repositories {
-        
-     maven { url "https://repo.maven.apache.org/maven2" }
+    mavenCentral()
 }
+
 dependencies {
-    testCompile group: 'junit', name: 'junit', version:'3.8.1'
+    testImplementation 'junit:junit:4.13.2'
 }
