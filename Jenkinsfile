@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/paramananda-15/MyMaventoGradle.git'
@@ -11,17 +12,20 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'chmod +x gradlew'
-                sh './gradlew build'
+                sh './gradlew clean build'
             }
         }
-    }
 
-    post {
-        success {
-            echo 'Build Successful'
+        stage('Test') {
+            steps {
+                sh './gradlew test'
+            }
         }
-        failure {
-            echo 'Build Failed'
+
+        stage('Run') {
+            steps {
+                sh './gradlew run || true'
+            }
         }
     }
 }
